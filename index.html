@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscrição - Portal Educacional SENAI</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="senai-165.png" type="image/png">
+  <link rel="shortcut icon" href="senai-165.png" type="image/png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* FUNDO VANTA */
+    #background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .login-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* LOGO */
+    .login-logo img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    /* FORMULÁRIO */
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 40px 35px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      text-align: center;
+      transition: 0.4s;
+    }
+
+    .login-box h1 {
+      font-size: 1.8rem;
+      color: #222291;
+      margin-bottom: 20px;
+    }
+
+    .login-box label {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      margin: 10px 0 5px;
+      color: #444;
+    }
+
+    .login-box input, .login-box select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #be5820;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background-color: #a34b1b;
+    }
+
+    .login-box p {
+      font-size: 0.9rem;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .login-box p a {
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* TELA DE CONFIRMAÇÃO E PARABÉNS */
+    .confirmacao, .parabens {
+      display: none;
+      background-color: rgba(255,255,255,0.8);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      width: 350px;
+      animation: aparecer 0.4s ease;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .confirmacao h2, .parabens h2 {
+      color: #222291;
+      margin-bottom: 20px;
+    }
+
+    .confirmacao button, .parabens button {
+      background-color: #be5820;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .confirmacao button:hover, .parabens button:hover {
+      background-color: #a34b1b;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 600px) {
+      .login-box, .confirmacao, .parabens { width: 85%; padding: 30px 20px; }
+      .login-logo img { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FUNDO VANTA -->
+  <div id="background"></div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="SENAI_logo_2024.png" alt="SENAI">
+    </div>
+
+    <!-- FORMULÁRIO DE INSCRIÇÃO -->
+    <div class="login-box" id="formulario">
+      <h1>Inscrição SENAI</h1>
+      <form id="inscricaoForm">
+        <!-- CAMPOS DE LOGIN -->
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" placeholder="Digite seu usuário" required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+        <!-- CAMPOS DE INSCRIÇÃO -->
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="Digite seu e-mail" required>
+
+        <!-- CAMPO TELEFONE COM MÁSCARA -->
+        <label for="telefone">Número de Telefone</label>
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" required maxlength="15">
+
+        <label for="curso">Selecione o Curso</label>
+        <select id="curso" required>
+          <option value="">-- Escolha um curso --</option>
+          <option value="automacao">Automação Industrial</option>
+          <option value="mecanica">Mecânica</option>
+          <option value="eletrica">Elétrica</option>
+          <option value="ds">Desenvolvimento de Sistemas</option>
+        </select>
+
+        <button type="submit">Enviar Inscrição</button>
+      </form>
+      <p><a id="jaAluno">Já sou aluno!</a></p>
+    </div>
+
+    <!-- MENSAGEM DE CONFIRMAÇÃO -->
+    <div class="confirmacao" id="confirmacao">
+      <h2>Inscrição Enviada com Sucesso!</h2>
+      <p>Obrigado por se inscrever no SENAI. Entraremos em contato por e-mail.</p>
+      <button id="voltar">Voltar</button>
+    </div>
+
+    <!-- MENSAGEM DE PARABÉNS -->
+    <div class="parabens" id="parabens">
+      <h2>🎉 Parabéns, aluno do SENAI! 🎉</h2>
+      <p>É um orgulho ter você com a gente. Continue estudando e transformando o futuro!</p>
+      <button id="voltarAluno">Voltar</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DO FUNDO VANTA -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+  <script>
+    // FUNDO ANIMADO
+    window.addEventListener('load', function() {
+      VANTA.NET({
+        el: "#background",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xd45b13,
+        backgroundColor: 0x222291,
+        points: 16.00,
+        maxDistance: 19.00,
+        spacing: 14.00
+      });
+    });
+
+    // LÓGICA DE FORMULÁRIO
+    const form = document.getElementById("inscricaoForm");
+    const formulario = document.getElementById("formulario");
+    const confirmacao = document.getElementById("confirmacao");
+    const parabens = document.getElementById("parabens");
+    const voltar = document.getElementById("voltar");
+    const voltarAluno = document.getElementById("voltarAluno");
+    const telefoneInput = document.getElementById("telefone");
+
+    // MÁSCARA AUTOMÁTICA DE TELEFONE
+    telefoneInput.addEventListener("input", function (e) {
+      let valor = e.target.value.replace(/\D/g, "");
+      if (valor.length > 11) valor = valor.slice(0, 11);
+
+      if (valor.length > 10) {
+        valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+      } else if (valor.length > 6) {
+        valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+      } else if (valor.length > 2) {
+        valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+      } else {
+        valor = valor.replace(/^(\d*)/, "($1");
+      }
+
+      e.target.value = valor;
+    });
+
+    // AO ENVIAR INSCRIÇÃO
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      formulario.style.display = "none";
+      confirmacao.style.display = "block";
+    });
+
+    // BOTÃO VOLTAR (da tela de confirmação)
+    voltar.addEventListener("click", function() {
+      confirmacao.style.display = "none";
+      formulario.style.display = "block";
+    });
+
+    // "JÁ SOU ALUNO!" — Mostra mensagem de parabéns
+    document.getElementById("jaAluno").addEventListener("click", () => {
+      formulario.style.display = "none";
+      parabens.style.display = "block";
+    });
+
+    // BOTÃO VOLTAR da tela de parabéns
+    voltarAluno.addEventListener("click", () => {
+      parabens.style.display = "none";
+      formulario.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
